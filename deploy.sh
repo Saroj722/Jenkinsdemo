@@ -1,20 +1,20 @@
 #!/bin/bash
 echo "Deploying application..."
 
-# Kill any previous app if it's running
+# Kill any previous process on port 5000
 fuser -k 5000/tcp || true
 
-# Start the Flask app using nohup and log output/errors
+# Start the Flask app in the background with logging
 nohup venv/bin/python3 app.py > app.log 2>&1 &
 
-# Wait briefly to ensure app has time to start
+# Give it a moment to start
 sleep 3
 
-# Print last few log lines to Jenkins
+# Show the last 10 lines of the log
 echo "App log:"
 tail -n 10 app.log
 
-# Check if process is listening on port 5000
+# Show processes listening on port 5000 (remove sudo)
 echo "Processes on port 5000:"
-sudo lsof -i :5000
+lsof -i :5000 || echo "Could not check port (no sudo)"
 
