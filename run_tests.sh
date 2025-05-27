@@ -16,5 +16,5 @@ echo "Upgrading pip..."
 echo "Installing dependencies..."
 ./venv/bin/pip install -r requirements.txt
 
-echo "Running tests..."
+echo "Running tests......"
 ./venv/bin/python3 -m pytest test_app.py
